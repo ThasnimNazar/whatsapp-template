@@ -1,6 +1,11 @@
 import axios from "axios";
 
-const API_BASE_URL = "http://localhost:5000/api";
+const mode = import.meta.env.VITE_MODE;
+
+const API_BASE_URL =
+  mode === "development"
+    ? import.meta.env.VITE_LOCAL_API
+    : import.meta.env.VITE_PROD_API;
 
 export const createTemplate = async (templateData) => {
   try {
@@ -49,7 +54,7 @@ export const sendMessage = async (messageData) => {
 export const updateTemplate = async (templateId, updatedData) => {
   try {
     const response = await axios.put(`${API_BASE_URL}/update-template/${templateId}`, updatedData);
-    console.log(response,'resp')
+    console.log(response, 'resp')
     return response.data;
   } catch (error) {
     console.error("Error updating template:", error);
@@ -79,7 +84,7 @@ export const getTemplateLogs = async (templateId) => {
 
 export const updateTemplateStatus = async (templateId, status) => {
   try {
-    const response = await axios.patch(`${API_BASE_URL}/status/${templateId}`,{ status });
+    const response = await axios.patch(`${API_BASE_URL}/status/${templateId}`, { status });
     return response.data;
   }
   catch (error) {

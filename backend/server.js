@@ -12,7 +12,10 @@ const port = 5000 || process.env.PORT
 connectDB();
 
 const corsOptions = {
-  origin: 'http://localhost:5173',
+  origin: [
+    'http://localhost:5173',
+    'https://whatsapp-template-kappa.vercel.app'
+  ],
   methods: ['GET', 'POST', 'PUT', 'DELETE','PATCH','OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
 };
