@@ -6,12 +6,21 @@ const ViewLogsModal = ({ open, onCancel, logs }) => {
       title: "Recipient",
       dataIndex: "recipient",
       key: "recipient",
+      responsive: ["xs", "sm", "md", "lg"],
     },
     {
       title: "Placeholders",
       key: "placeHolders",
       render: (_, record) => (
-        <pre style={{ margin: 0 }}>{JSON.stringify(record.placeHolders, null, 2)}</pre>
+        <pre
+          style={{
+            margin: 0,
+            whiteSpace: "pre-wrap",
+            wordBreak: "break-word",
+          }}
+        >
+          {JSON.stringify(record.placeHolders, null, 2)}
+        </pre>
       ),
     },
     {
@@ -28,7 +37,12 @@ const ViewLogsModal = ({ open, onCancel, logs }) => {
       onCancel={onCancel}
       title="Template Usage Logs"
       footer={null}
-      width={700}
+      centered
+      width={window.innerWidth < 768 ? "90%" : 700}
+      bodyStyle={{
+        overflowX: "auto",
+        padding: "12px",
+      }}
     >
       <Table
         columns={columns}
@@ -36,6 +50,9 @@ const ViewLogsModal = ({ open, onCancel, logs }) => {
         rowKey="_id"
         pagination={{ pageSize: 5 }}
         locale={{ emptyText: "No logs available" }}
+        scroll={{ x: true }}
+        size="middle"
+        style={{ minWidth: "100%" }}
       />
     </Modal>
   );

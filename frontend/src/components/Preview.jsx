@@ -1,4 +1,3 @@
-import React from "react";
 import "../css/Preview.css";
 
 const Preview = ({ message }) => {
